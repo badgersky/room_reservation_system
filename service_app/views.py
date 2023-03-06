@@ -27,3 +27,8 @@ def add_room(request):
                     projector=projector
                     )
                 return HttpResponse('Room created')
+
+
+def show_all_rooms(request):
+    rooms = Room.objects.all()
+    return render(request, 'service_app/show_all_rooms.html', {'rooms': rooms})
