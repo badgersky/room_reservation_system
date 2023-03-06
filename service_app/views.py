@@ -1,5 +1,5 @@
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.utils.datastructures import MultiValueDictKeyError
 
 from service_app.models import Room
@@ -32,3 +32,9 @@ def add_room(request):
 def show_all_rooms(request):
     rooms = Room.objects.all()
     return render(request, 'service_app/show_all_rooms.html', {'rooms': rooms})
+
+
+def delete_room(request, room_id):
+    room = Room.objects.get(pk=room_id)
+    room.delete()
+    return redirect('room_list')
