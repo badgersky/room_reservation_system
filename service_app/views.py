@@ -2,6 +2,7 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.utils.datastructures import MultiValueDictKeyError
 from service_app.models import Room
+from service_app.utils import modify_room_info
 
 
 def add_room(request):
@@ -54,8 +55,5 @@ def modify_room(request, room_id):
             if projector == 'True':
                 projector = True
             room = Room.objects.get(pk=room_id)
-            room.name = room_name
-            room.seat_number = room_capacity
-            room.projector = projector
-            room.save()
+            modify_room_info(room, room_name, room_capacity, projector)
             return redirect('room_list')
