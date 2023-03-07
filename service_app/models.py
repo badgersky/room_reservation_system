@@ -14,4 +14,3 @@ class Reservation(models.Model):
 
     class Meta:
         unique_together = ('room', 'date')
-        

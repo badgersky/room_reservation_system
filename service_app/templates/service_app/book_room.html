@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BookRoom</title>
+</head>
+<body>
+<form action="" method="post">
+    {% csrf_token %}
+    <label>Comment<input type="text" name="comment"></label>
+    <label>Date<input type="date" name="date"></label>
+    <input type="submit" value="Book">
+</form>
+</body>
+</html>
