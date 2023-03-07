@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ModifyRoom</title>
+</head>
+<body>
+<form action="" method="post">
+    {% csrf_token %}
+    <label>Room`s name<input type="text" name="name" value={{ room.name }} required></label><br>
+    <label>Number of seats<input type="number" name="seats_num" min="1" value={{ room.seat_number }} required></label><br>
+    <label>Projector<input type="checkbox" name="projector" value="True" {% if room.projector %}checked{% endif %}></label><br>
+    <input type="submit" value="Modify"><br>
+</form>
+</body>
+</html>
