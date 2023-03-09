@@ -8,3 +8,9 @@ def modify_room_info(room, name, capacity, projector):
     room.save()
 
 
+def check_date(date):
+    today = date.today()
+    if today > date:
+        return True
+    else:
+        return False

@@ -1,8 +1,9 @@
+from datetime import datetime
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.utils.datastructures import MultiValueDictKeyError
 from service_app.models import Room, Reservation
-from service_app.utils import modify_room_info
+from service_app.utils import modify_room_info, check_date
 
 
 def add_room(request):
@@ -63,4 +64,12 @@ def book_room(request, room_id):
     if request.method == 'GET':
         return render(request, 'service_app/book_room.html')
     elif request.method == 'POST':
-        pass
+        booking_date = request.POST['date']
+        booking_date = datetime.strptime(booking_date, '%Y-%m-%d').date()
+        if check_date(booking_date):
+            return HttpResponse('You have entered date in the past')
+        if Reservation.objects.filter(room_id=room_id, date=booking_date).exists():
+            return HttpResponse('Reservation for this room, for that day already exists')
+        comment = request.POST['comment']
+        Reservation.objects.create(room_id=room_id, date=booking_date, comment=comment)
+        return redirect('room_list')
