@@ -6,12 +6,12 @@
 </head>
 <body>
 <ul>
-    <li>room name, seat number, is free, modify room, delete room, book room</li>
+    <li>room name, seat number, is available, modify room, delete room, book room</li>
         {% for room in rooms %}
         <li>
         <a href="room/{{ room.id }}/">{{ room.name }}</a>
         {{ room.seat_number }}
-        Free
+        {{ room.reserved }}
         <a href="/room/modify/{{ room.id }}/"><input type="button" value="modify"></a>
         <a href="/room/delete/{{ room.id }}/"><input type="button" value="delete"></a>
         <a href="/room/book/{{ room.id }}/"><input type="button" value="book"></a>

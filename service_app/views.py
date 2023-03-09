@@ -28,6 +28,9 @@ def add_room(request):
 
 def show_all_rooms(request):
     rooms = Room.objects.all()
+    for room in rooms:
+        reservations = [reservation.date for reservation in room.reservation_set.all()]
+        room.reserved = date.today() in reservations
     return render(request, 'service_app/show_all_rooms.html', {'rooms': rooms})
 
 
