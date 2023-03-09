@@ -65,7 +65,8 @@ def modify_room(request, room_id):
 
 def book_room(request, room_id):
     if request.method == 'GET':
-        return render(request, 'service_app/book_room.html')
+        reservations = Reservation.objects.filter(room_id=room_id)
+        return render(request, 'service_app/book_room.html', {'reservations': reservations})
     elif request.method == 'POST':
         booking_date = request.POST['date']
         booking_date = datetime.strptime(booking_date, '%Y-%m-%d').date()
@@ -82,7 +83,7 @@ def show_room_info(request, room_id):
     if request.method == 'GET':
         room = Room.objects.get(pk=room_id)
         today = date.today()
-        future_reservations = Reservation.objects.filter(room_id=room_id, date__gt=today)
+        future_reservations = Reservation.objects.filter(room_id=room_id, date__gte=today)
         return render(request, 'service_app/show_room_info.html', {
                        'room': room,
                        'reservations': future_reservations

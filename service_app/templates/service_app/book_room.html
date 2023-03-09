@@ -11,5 +11,14 @@
     <label>Date<input type="date" name="date"></label>
     <input type="submit" value="Book">
 </form>
+<h3>Reservations</h3>
+<ul>
+    {% for reservation in reservations %}
+        <li>
+        {{ reservation.date }}
+        {{ reservation.comment }}
+        </li>
+    {% endfor %}
+</ul>
 </body>
 </html>
