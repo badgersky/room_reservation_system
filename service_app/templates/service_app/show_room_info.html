@@ -14,5 +14,11 @@
         <li>{{ reservation.date }}, {{ reservation.comment }}</li>
     {% endfor %}
 </ul>
+<form action="" method="post">
+    {% csrf_token %}
+    <input type="submit" value="modify" name="button">
+    <input type="submit" value="delete" name="button">
+    <input type="submit" value="book" name="button">
+</form>
 </body>
 </html>

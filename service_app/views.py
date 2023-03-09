@@ -76,10 +76,19 @@ def book_room(request, room_id):
 
 
 def show_room_info(request, room_id):
-    room = Room.objects.get(pk=room_id)
-    today = date.today()
-    future_reservations = Reservation.objects.filter(room_id=room_id, date__gt=today)
-    return render(request, 'service_app/show_room_info.html', {
-                   'room': room,
-                   'reservations': future_reservations
-                   })
+    if request.method == 'GET':
+        room = Room.objects.get(pk=room_id)
+        today = date.today()
+        future_reservations = Reservation.objects.filter(room_id=room_id, date__gt=today)
+        return render(request, 'service_app/show_room_info.html', {
+                       'room': room,
+                       'reservations': future_reservations
+                       })
+    elif request.method == 'POST':
+        submit = request.POST['button']
+        if submit == 'modify':
+            return redirect('modify_room', room_id)
+        elif submit == 'delete':
+            return redirect('delete_room', room_id)
+        elif submit == 'book':
+            return redirect('book_room', room_id)
