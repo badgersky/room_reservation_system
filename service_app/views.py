@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, date
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.utils.datastructures import MultiValueDictKeyError
@@ -73,3 +73,13 @@ def book_room(request, room_id):
         comment = request.POST['comment']
         Reservation.objects.create(room_id=room_id, date=booking_date, comment=comment)
         return redirect('room_list')
+
+
+def show_room_info(request, room_id):
+    room = Room.objects.get(pk=room_id)
+    today = date.today()
+    future_reservations = Reservation.objects.filter(room_id=room_id, date__gt=today)
+    return render(request, 'service_app/show_room_info.html', {
+                   'room': room,
+                   'reservations': future_reservations
+                   })

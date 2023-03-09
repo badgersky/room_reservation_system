@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ room.name }}RoomInfo</title>
+</head>
+<body>
+<h2>{{ room.name }}</h2>
+<p>Does have projector: {% if room.projector %}Yes{% endif %}{% if not room.projector %}No{% endif %}</p>
+<p>Room capacity: {{ room.seat_number }}</p>
+<h3>Reservations:</h3>
+<ul>
+    {% for reservation in reservations %}
+        <li>{{ reservation.date }}, {{ reservation.comment }}</li>
+    {% endfor %}
+</ul>
+</body>
+</html>

@@ -1,5 +1,5 @@
 from django.urls import path
-from service_app.views import add_room, show_all_rooms, delete_room, modify_room, book_room
+from service_app.views import add_room, show_all_rooms, delete_room, modify_room, book_room, show_room_info
 
 
 urlpatterns = [
@@ -8,4 +8,5 @@ urlpatterns = [
     path('room/delete/<room_id>/', delete_room),
     path('room/modify/<room_id>/', modify_room),
     path('room/book/<room_id>/', book_room),
+    path('room/<room_id>', show_room_info),
 ]
