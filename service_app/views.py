@@ -51,6 +51,8 @@ def modify_room(request, room_id):
     elif request.method == 'POST':
         try:
             room_name = request.POST['name']
+            if Room.objects.filter(name=room_name).exists():
+                return HttpResponse(f'Room name already in use: {room_name}')
             room_capacity = int(request.POST['seats_num'])
             projector = request.POST.get('projector', False)
         except MultiValueDictKeyError:
